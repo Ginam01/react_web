@@ -1,11 +1,10 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import "./default.css";
-import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { loginIdState, memberTypeState } from "../utils/RecoilData";
 
 
-const Header = (props) => {
-    const isLogin = props.isLogin;
-    const setIsLogin = props.setIsLogin;
+const Header = () => {
     return(
         <header className="header">
             <div>
@@ -13,7 +12,7 @@ const Header = (props) => {
                     <Link to="/">Lee s world</Link>
                 </div>
                 <MainNavi/> 
-                <HeaderLink isLogin={isLogin} setIsLogin={setIsLogin}/>
+                <HeaderLink/>
             </div>
         </header>
     );
@@ -40,21 +39,22 @@ const MainNavi = () => {
     );
 };
 
-const HeaderLink = (props) => {
-    const isLogin = props.isLogin;
-    const setIsLogin = props.setIsLoginLogin;
-
+const HeaderLink = () => {
+    const [memberId, setMemberId] = useRecoilState(loginIdState);
+    const [memberType, setMemberType] = useRecoilState(memberTypeState);
+    const navigate = useNavigate();
     const logout = () => {
-        setIsLogin(false);
-        Navigate("/");
+        setMemberId("");
+        setMemberType(0);
+        navigate("/");
     };
     return(
         
         <ul className="user-menu">
-            {isLogin ?  (
+            {memberId !== "" && memberType !== 0 ?  (
             <>
             <li>
-                <Link to="#">마이페이지</Link>
+                <Link to="/member/mypage">{memberId}</Link>
             </li>
             <li>
                 <Link to="#" onClick={logout}>로그아웃</Link>

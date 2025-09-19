@@ -4,18 +4,18 @@ import Header from "./component/common/Header";
 import Main from "./component/common/Main";
 import MemberJoin from "./component/member/MemberJoin";
 import MemberLogin from "./component/member/MemberLogin";
-import { useState } from "react";
+import MemberMain from "./component/member/MemberMain.jsx";
 
 function App() {
-  const[isLogin, setIsLogin] = useState(false);
   return (
     <div className='wrap'>
-    <Header isLogin={isLogin} setIsLogin={setIsLogin}/>
+    <Header/>
     <main className="content">
       <Routes> 
         <Route path="/" element={<Main/>} />
         <Route path="/member/join" element={<MemberJoin/>} />
-        <Route path="/member/login" element={<MemberLogin setIsLogin={setIsLogin}/>}/>
+        <Route path="/member/login" element={<MemberLogin/>}/>
+        <Route path="/member/mypage" element={<MemberMain/>}/>
       </Routes>
     </main>
     <Footer/>

@@ -1,10 +1,17 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import Swal from "sweetalert2";
+import { loginIdState, memberTypeState } from "../utils/RecoilData";
 
-const MemberLogin = (props) => {
-    const setIsLogin = props.setIsLogin;
+const MemberLogin = () => {
+    //recoil에 선언한 데이터를 가져옴 State-Type
+    const [memberId, setMemberId] = useRecoilState(loginIdState);
+    const [memberType, setMemberType] = useRecoilState(memberTypeState);
+    
+
+
     const [member, setMember] = useState({
         memberId: "",
         memberPw: "",
@@ -25,7 +32,9 @@ const MemberLogin = (props) => {
                     title: "로그인 성공",
                     text: "환영합니다!",
                 })
-                setIsLogin(true);
+                console.log(res);
+                setMemberId(res.data.memberId);
+                setMemberType(res.data.memberType);
                 navigate("/");
                 
             }).catch((err)=>{
