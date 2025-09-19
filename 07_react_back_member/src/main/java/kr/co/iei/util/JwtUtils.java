@@ -2,8 +2,11 @@ package kr.co.iei.util;
 
 import org.springframework.stereotype.Component;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import kr.co.iei.member.controller.MemberController;
+import kr.co.iei.member.model.dto.LoginMemberDTO;
 
 import java.util.Date;
 import java.util.Calendar;
@@ -15,12 +18,14 @@ import org.springframework.beans.factory.annotation.Value;
 
 @Component
 public class JwtUtils {
+
 	@Value("${jwt.secret-key}")
 	private String secretKey;
 	@Value("${jwt.expire-hour}")
 	private int expireHour;
 	@Value("${jwt.expire-hour-refresh}")
 	private int expireHourRefresh;
+
 	
 	public String createAccessToken(String memberId, int memberType) {
 		SecretKey key = Keys.hmacShaKeyFor(secretKey.getBytes());
@@ -57,5 +62,21 @@ public class JwtUtils {
 				.claim("memberType", memberType) //토큰에 포함될 회원정보 세팅
 				.compact();//생성
 		return token;
+	}
+	
+	public LoginMemberDTO checkToken(String token) {
+		SecretKey key = Keys.hmacShaKeyFor(secretKey.getBytes());
+		
+		Claims claims = (Claims)Jwts.parser() //jwt토큰 분석하는게 parser
+				.verifyWith(key)
+				.build()
+				.parse(token)
+				.getPayload();	
+		String memberId = (String)claims.get("memberId"); //object type
+		int memberType = (int)claims.get("memberType");
+		LoginMemberDTO loginMember = new LoginMemberDTO();
+		loginMember.setMemberId(memberId);
+		loginMember.setMemberType(memberType);
+		return loginMember;
 	}
 }

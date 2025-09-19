@@ -10,7 +10,8 @@ const MemberMain = () => {
     const [member,setMember] = useState(null); //마이페이지에서 사용할 로그인 저장
 
     useEffect(()=> {
-        axios.get(`${import.meta.env.VITE_BACK_SERVER}/member/${memberId}`)
+        axios.get(`${import.meta.env.VITE_BACK_SERVER}/member/${memberId}`,{
+        })
         .then((res)=> {
             console.log(res);
             setMember(res.data);

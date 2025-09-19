@@ -35,6 +35,10 @@ const MemberLogin = () => {
                 console.log(res);
                 setMemberId(res.data.memberId);
                 setMemberType(res.data.memberType);
+                //로그인 이후에 axios 통한 요청을 수행하는경우 토큰값을 자동으로 axios 에 추가하는 로직
+                axios.defaults.headers.common["Authorization"] = res.data.accessToken;
+                //로그인을 성공하면 갱싱을 위한 refreshtoken을 브라우저에 저장
+                window.localStorage.setItem("refreshToken", res.data.refreshToken);
                 navigate("/");
                 
             }).catch((err)=>{

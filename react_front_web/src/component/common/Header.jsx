@@ -2,6 +2,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import "./default.css";
 import { useRecoilState } from "recoil";
 import { loginIdState, memberTypeState } from "../utils/RecoilData";
+import axios from "axios";
 
 
 const Header = () => {
@@ -44,8 +45,13 @@ const HeaderLink = () => {
     const [memberType, setMemberType] = useRecoilState(memberTypeState);
     const navigate = useNavigate();
     const logout = () => {
+        
         setMemberId("");
         setMemberType(0);
+        
+        delete axios.defaults.headers.common["Authorization"];
+        window.localStorage.removeItem("refreshToken");
+
         navigate("/");
     };
     return(
@@ -57,7 +63,7 @@ const HeaderLink = () => {
                 <Link to="/member/mypage">{memberId}</Link>
             </li>
             <li>
-                <Link to="#" onClick={logout}>로그아웃</Link>
+                <Link to="/" onClick={logout}>로그아웃</Link>
             </li>
             </>
             ):(
