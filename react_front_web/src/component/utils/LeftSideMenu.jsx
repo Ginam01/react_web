@@ -10,8 +10,8 @@ const LeftSideMenu = (props) => {
                     return(
                         <li key={"side-menu-"+i}>
                             <NavLink to={menu.url} className={({isActive})=>{
-                                isActive ? "active-link" : ""
-                                ;}}>
+                                isActive ? "active-link" : "";}}
+                                >
                             <span>{menu.text}</span>
                             <ChevronRightIcon/>
                             </NavLink>
