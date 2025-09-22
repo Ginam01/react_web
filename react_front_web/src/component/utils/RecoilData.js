@@ -21,6 +21,13 @@ const memberTypeState = atom({
     effects_UNSTABLE:[persistAtom],
 });
 
+//refresh 초기화 확인용 데이터
+const authReadyState = atom({
+    key : "authReadyState",
+    default: false
+})
+
+
 //selector : atom으로 생성한 데이터를 이용해서 함수를 실행하고 결과를 리턴
 const isLoginState = selector({
     key : "isLoginState",
@@ -36,4 +43,4 @@ const isLoginState = selector({
 
 });
 
-export { loginIdState, memberTypeState, isLoginState};
+export { loginIdState, memberTypeState, isLoginState, authReadyState};

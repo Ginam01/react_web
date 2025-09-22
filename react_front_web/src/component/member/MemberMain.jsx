@@ -1,47 +1,54 @@
 import { useRecoilState, useRecoilValue } from "recoil";
-import { isLoginState, loginIdState } from "../utils/RecoilData";
-import Swal from "sweetalert2";
+import { authReadyState, isLoginState, loginIdState } from "../utils/RecoilData";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { Route, Routes} from "react-router-dom";
+import LeftSideMenu from "../utils/LeftSideMenu";
+import MemberInfo from "./MemberInfo";
+import ChangePw from "./ChangePw";
 
 const MemberMain = () => {
     const [memberId, setMemberId] = useRecoilState(loginIdState);
     const [member,setMember] = useState(null); //마이페이지에서 사용할 로그인 저장
+    const [authReady, setAuthReady] = useRecoilState(authReadyState);
+    const isLogin = useRecoilValue(isLoginState);
+    const navigate = useNavigate();
+    
 
     useEffect(()=> {
-        axios.get(`${import.meta.env.VITE_BACK_SERVER}/member/${memberId}`,{
-        })
-        .then((res)=> {
-            console.log(res);
-            setMember(res.data);
-            
-        }).catch((err)=> {
-            console.log(err);
-        })
+        if (authReady && !isLogin){
+            navigate("/");
+        }
+    },[authReady]); 
+    const [menus, setMemus] = useState([
+        {url : "/member/info", text : "내 정보"},
+        {url : "/member/changePw", text : "비밀번호 변경"},
 
-
-    },[])
-    /*
-    const isLogin = useRecoilValue(isLoginState);// return된 데이터를 바로줌
-    const navigate = useNavigate();
-    if(!isLogin){
-        Swal.fire({
-            title: "로그인을 해주세요!",
-            icon: "info"
-        }).then(() => { //swal 이 뜨고 then함수가 돌아감 안할시 페이지에 머물러져있음
-            navigate("/member/login");
-        });
-
-    }else{
-
-    }
-*/
+    ]);
 
     return(
     <div className="mypage-wrap">
         <h3>마이페이지</h3>
-        
+        <div className="mypage-wrap">
+            <div className="mypage-side">
+                <section className="section account-box">
+                <div>My page</div>
+                </section>
+                <section className="section">
+                    <LeftSideMenu menus={menus}/>
+                </section>
+            </div>
+            <div className="mypage-content">
+                <section className="section">
+                    
+        <Routes>
+            <Route path="info" element={<MemberInfo />}></Route> 
+            <Route path="changePw" element={<ChangePw />}></Route>
+        </Routes>
+                </section>
+            </div>
+            
+        </div>
 
     </div>
 );
