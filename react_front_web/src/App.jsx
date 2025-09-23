@@ -9,6 +9,8 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { authReadyState, loginIdState, memberTypeState } from "./component/utils/RecoilData.js";
+import BoardList from "./component/board/BoardList.jsx";
+import BoardWrite from "./component/board/BoardWrite.jsx";
 
 function App() {
   const [memberId, setMember]= useRecoilState(loginIdState);
@@ -57,7 +59,8 @@ function App() {
         <Route path="/member/join" element={<MemberJoin/>} />
         <Route path="/member/login" element={<MemberLogin/>}/>
         <Route path="/member/*" element={<MemberMain/>}/>
-
+        <Route path="/board/List" element={<BoardList/>}/>
+        <Route path="/board/write" element={<BoardWrite/>}/>
       </Routes>
     </main>
     <Footer/>

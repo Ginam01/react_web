@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;member-mapper.xml&apos; to &apos;mapper&apos;&#x0D;&#x0A;- Original project: &apos;07_react_back_member&apos;&#x0D;&#x0A;- Destination element: &apos;mapper&apos;&#x0D;&#x0A;- Original element: &apos;member-mapper.xml&apos;" description="Copy file" element1="src/main/resources/mapper/member-mapper.xml" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1758521734748" target="/07_react_back_member/src/main/resources/mapper" units="0" version="1.0"/>
+</session>

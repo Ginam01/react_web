@@ -12,3 +12,20 @@
 .side-menu .active-link > svg{
     fill: var(--main2);
 }
+
+.my-info {
+    width: 80%;
+    margin: 0 auto;
+}
+.my-info .input-item > input {
+    border-bottom: none;
+    padding: 0;
+
+}
+.button-zone {
+    width: 80%;
+    margin: 30px auto;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}

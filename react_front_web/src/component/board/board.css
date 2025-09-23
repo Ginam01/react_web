@@ -1,0 +1,33 @@
+.board-list{
+    min-width: 1200px;
+}
+
+.pagenation {
+    display: flex;           
+    justify-content: center;   
+    list-style: none;          
+    padding: 0;                 
+    margin: 20px 0;            
+}
+
+.pagenation > li {
+    margin: 0 5px;             
+}
+
+.pagenation > li {
+    display: flex;
+    align-items: center;
+}
+.pagenation > li > span{
+    display: block;
+    cursor: pointer;
+    width: 100%;
+}
+.active-page{
+    background-color: #6059f7;
+    color: aliceblue;
+}
+
+.active-page:hover{
+    background-color: #6059f7;
+}
