@@ -78,3 +78,13 @@
 .board-file-wrap > p > svg{
     cursor: pointer;
 }
+.board-frm >.board-content-wrap{
+    display: block;
+    padding-top: 10px;
+    padding-bottom: 30px;
+} 
+.board-frm >.board-content-wrap> .quill{
+    height: 300px;
+    padding-bottom: 30px;
+
+} 

@@ -48,7 +48,15 @@ const BoardItem = (props) =>{
     return(
         <li className="posting-item">
             <div className="posting-img">
-                <img src="/image/default_img.png" ></img>
+                <img 
+                src={
+                    board.boardThumb !== null
+                    ? `${import.meta.env.VITE_BACK_SERVER}/board/thumb/${
+                        board.boardThumb
+                    }`
+                    : "/image/default_img.png"
+                } 
+                ></img>
             </div>
             <div className="posting-info">
                 <div className="posting-title">{board.boardTitle}</div>
